@@ -35,7 +35,7 @@ FetchContent_MakeAvailable(tinygltf)
 
 juce_add_plugin(DVDsRGBAudioVST
     COMPANY_NAME                "DVDs-RGB"
-    IS_SYNTH                    FALSE
+    IS_SYNTH                    TRUE
     NEEDS_MIDI_INPUT            TRUE
     NEEDS_MIDI_OUTPUT           FALSE
     IS_MIDI_EFFECT              FALSE

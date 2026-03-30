@@ -8,6 +8,10 @@
 #include "Audio/EnvelopeFollower.h"
 #include "Audio/BeatDetector.h"
 #include "Audio/AudioColorMapper.h"
+#include "Synth/SynthVoice.h"
+#include "Synth/VoiceManager.h"
+#include "Synth/EffectsChain.h"
+#include "Synth/ColorSynthMapper.h"
 
 class DVDsRGBAudioProcessor : public juce::AudioProcessor {
 public:
@@ -37,6 +41,7 @@ public:
     void getStateInformation(juce::MemoryBlock& destData) override;
     void setStateInformation(const void* data, int sizeInBytes) override;
 
+    // Accessors
     dvds::ColorTheoryEngine& getColorEngine() { return colorEngine_; }
     dvds::PaletteState& getPaletteState() { return paletteState_; }
     dvds::FFTAnalyzer& getFFTAnalyzer() { return fftAnalyzer_; }
@@ -44,22 +49,40 @@ public:
     dvds::MultiBandEnvelope& getEnvelopes() { return envelopes_; }
     dvds::BeatDetector& getBeatDetector() { return beatDetector_; }
     dvds::AudioColorMapper& getAudioColorMapper() { return audioColorMapper_; }
+    dvds::VoiceManager& getVoiceManager() { return voiceManager_; }
+    dvds::ColorSynthMapper& getColorSynthMapper() { return colorSynthMapper_; }
+    const dvds::SynthParams& getSynthParams() const { return synthParams_; }
+    const dvds::EffectsParams& getEffectsParams() const { return fxParams_; }
 
     juce::AudioProcessorValueTreeState& getParameters() { return parameters_; }
 
 private:
     juce::AudioProcessorValueTreeState parameters_;
 
+    // Color / Visual
     dvds::ColorTheoryEngine colorEngine_;
     dvds::PaletteState paletteState_;
+
+    // Audio analysis
     dvds::FFTAnalyzer fftAnalyzer_;
     dvds::BandSplitter bandSplitter_;
     dvds::MultiBandEnvelope envelopes_;
     dvds::BeatDetector beatDetector_;
     dvds::AudioColorMapper audioColorMapper_;
 
+    // Synth
+    dvds::VoiceManager voiceManager_;
+    dvds::SynthParams synthParams_;
+    dvds::EffectsChain effectsChain_;
+    dvds::EffectsParams fxParams_;
+    dvds::ColorSynthMapper colorSynthMapper_;
+
     int sampleCounter_ = 0;
     double currentSampleRate_ = 44100.0;
+
+    void updateSynthParamsFromTree();
+    void updateFXParamsFromTree();
+    void handleMidi(juce::MidiBuffer& midi, int numSamples);
 
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
 

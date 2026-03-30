@@ -1,4 +1,5 @@
 #include "Visuals/Scene3D.h"
+#include <cmath>
 
 namespace dvds {
 

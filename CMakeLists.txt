@@ -80,6 +80,8 @@ target_sources(DVDsRGBAudioVST
         Source/GUI/MainLayout.cpp
 )
 
+juce_generate_juce_header(DVDsRGBAudioVST)
+
 target_compile_definitions(DVDsRGBAudioVST
     PUBLIC
         JUCE_WEB_BROWSER=0

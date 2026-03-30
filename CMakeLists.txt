@@ -40,7 +40,7 @@ juce_add_plugin(DVDsRGBAudioVST
     NEEDS_MIDI_OUTPUT           FALSE
     IS_MIDI_EFFECT              FALSE
     EDITOR_WANTS_KEYBOARD_FOCUS TRUE
-    COPY_PLUGIN_AFTER_BUILD     TRUE
+    COPY_PLUGIN_AFTER_BUILD     FALSE
     PLUGIN_MANUFACTURER_CODE    DRGB
     PLUGIN_CODE                 Drvs
     FORMATS                     VST3 AU Standalone

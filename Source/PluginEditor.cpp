@@ -233,7 +233,7 @@ void DVDsRGBAudioEditor::paint(juce::Graphics& g) {
     }
     g.setColour(juce::Colours::white.withAlpha(0.4f));
     g.setFont(9.0f);
-    g.drawText("BEAT", beatCircleX - 20, beatCircleY + 16, 40, 12, juce::Justification::centred);
+    g.drawText("BEAT", (int)(beatCircleX - 20), (int)(beatCircleY + 16), 40, 12, juce::Justification::centred);
 }
 
 void DVDsRGBAudioEditor::drawColorWheel(juce::Graphics& g, juce::Rectangle<float> area) {
@@ -285,8 +285,8 @@ void DVDsRGBAudioEditor::drawColorWheel(juce::Graphics& g, juce::Rectangle<float
     // Center text
     g.setColour(juce::Colours::white.withAlpha(0.7f));
     g.setFont(15.0f);
-    g.drawText(juce::String(int(wheelBaseHue_)) + juce::CharPointer_UTF8("\xc2\xb0"),
-               cx - 25, cy - 10, 50, 20, juce::Justification::centred);
+    g.drawText(juce::String(int(wheelBaseHue_)) + juce::String::charToString(0x00B0),
+               (int)(cx - 25), (int)(cy - 10), 50, 20, juce::Justification::centred);
 }
 
 void DVDsRGBAudioEditor::drawPaletteStrip(juce::Graphics& g, juce::Rectangle<float> area) {
@@ -305,7 +305,7 @@ void DVDsRGBAudioEditor::drawPaletteStrip(juce::Graphics& g, juce::Rectangle<flo
         g.setFont(9.0f);
         juce::String hex = "#" + juce::String::toHexString((int)currentPaletteRGB_[i].toHex())
                                     .paddedLeft('0', 6).toUpperCase();
-        g.drawText(hex, x, area.getBottom() - 13, sw, 12, juce::Justification::centred);
+        g.drawText(hex, (int)x, (int)(area.getBottom() - 13), (int)sw, 12, juce::Justification::centred);
     }
 }
 
@@ -511,7 +511,7 @@ void DVDsRGBAudioEditor::drawShaderPreview(juce::Graphics& g, juce::Rectangle<fl
     auto shaderNames = shaderSelectBox_.getText();
     g.setColour(juce::Colours::white.withAlpha(0.5f));
     g.setFont(11.0f);
-    g.drawText(shaderNames, area.getX() + 8, area.getY() + 4, 200, 16, juce::Justification::centredLeft);
+    g.drawText(shaderNames, (int)(area.getX() + 8), (int)(area.getY() + 4), 200, 16, juce::Justification::centredLeft);
 }
 
 void DVDsRGBAudioEditor::drawFFTPanel(juce::Graphics& g, juce::Rectangle<float> area) {
@@ -558,7 +558,7 @@ void DVDsRGBAudioEditor::drawBandMeters(juce::Graphics& g, juce::Rectangle<float
 
         g.setColour(juce::Colours::white.withAlpha(0.5f));
         g.setFont(8.0f);
-        g.drawText(names[i], x, area.getBottom() - 14, meterW - 3, 12, juce::Justification::centred);
+        g.drawText(names[i], (int)x, (int)(area.getBottom() - 14), (int)(meterW - 3), 12, juce::Justification::centred);
     }
 }
 
